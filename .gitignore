@@ -26,3 +26,5 @@ dist-ssr
 .env
 instructors.json
 private-data/
+.vercel
+.env*
