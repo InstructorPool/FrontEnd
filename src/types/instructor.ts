@@ -34,4 +34,7 @@ export type Instructor = {
   // 자격 / 저서
   certifications: string[];
   publications: string[];
+
+  instructorGrade?: string;
+  historyRaw?: string;
 };

@@ -1873,7 +1873,7 @@ const MainPage = () => {
                             .length >
                             0 && (
                             <>
-                              <p className="mb-3 text-sm font-bold text-gray-700">
+                              <p className="mb-3 text-m font-bold text-gray-700">
                                 강의 가능
                                 분야
                               </p>
@@ -1980,67 +1980,54 @@ const MainPage = () => {
                 selectedInstructor.department ||
                 selectedInstructor.role ||
                 selectedInstructor.number ||
-                selectedInstructor.email) && (
+                selectedInstructor.email ||
+                selectedInstructor.instructorGrade) && (
                 <section className="rounded-xl bg-slate-50 p-5">
-
                   <h3 className="mb-4 font-bold">
                     기본 정보
                   </h3>
 
                   <div className="grid gap-3 text-sm sm:grid-cols-2">
-
                     {selectedInstructor.company && (
                       <p>
-                        <b>
-                          소속 :
-                        </b>{" "}
-                        {
-                          selectedInstructor.company
-                        }
+                        <b>소속 :</b>{" "}
+                        {selectedInstructor.company}
                       </p>
                     )}
 
                     {selectedInstructor.role && (
                       <p>
-                        <b>
-                          직책 :
-                        </b>{" "}
-                        {
-                          selectedInstructor.role
-                        }
+                        <b>직책 :</b>{" "}
+                        {selectedInstructor.role}
                       </p>
                     )}
 
                     {selectedInstructor.department && (
                       <p>
-                        <b>
-                          담당 업무 :
-                        </b>{" "}
-                        {
-                          selectedInstructor.department
-                        }
+                        <b>담당 업무 :</b>{" "}
+                        {selectedInstructor.department}
+                      </p>
+                    )}
+
+                    {/* 강사 등급 */}
+                    {selectedInstructor.instructorGrade && (
+                      <p>
+                        <b>강사 등급 :</b>{" "}
+                        {selectedInstructor.instructorGrade}
                       </p>
                     )}
 
                     {selectedInstructor.number && (
                       <p>
-                        <b>
-                          연락처 :
-                        </b>{" "}
-                        {
-                          selectedInstructor.number
-                        }
+                        <b>연락처 :</b>{" "}
+                        {selectedInstructor.number}
                       </p>
                     )}
 
                     {selectedInstructor.email && (
                       <p className="break-all">
-                        <b>
-                          이메일 :
-                        </b>{" "}
-                        {
-                          selectedInstructor.email
-                        }
+                        <b>이메일 :</b>{" "}
+                        {selectedInstructor.email}
                       </p>
                     )}
                   </div>
@@ -2135,6 +2122,20 @@ const MainPage = () => {
                       )}
                     </div>
                   )}
+                </section>
+              )}
+
+              {selectedInstructor.historyRaw?.trim() && (
+                <section className="mt-8 border-t border-gray-200 pt-7">
+                  <h3 className="mb-4 text-lg font-bold text-gray-900">
+                    강사 이력
+                  </h3>
+
+                  <div className="rounded-xl bg-slate-50 px-5 py-4">
+                    <p className="whitespace-pre-line text-sm leading-7 text-gray-700">
+                      {selectedInstructor.historyRaw}
+                    </p>
+                  </div>
                 </section>
               )}
 
