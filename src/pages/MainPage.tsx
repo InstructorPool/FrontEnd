@@ -1834,6 +1834,38 @@ const MainPage = () => {
                           </p>
                         )}
 
+                        {/* KISIA 강의 이력 */}
+                        {(instructor.kisiaLectureHistories?.length ?? 0) > 0 && (
+                          <div className="mt-5">
+                            <p className="mb-3 text-sm font-bold text-gray-700">
+                              KISIA 강의 이력
+                            </p>
+
+                            <div className="space-y-2">
+                              {instructor.kisiaLectureHistories.map(
+                                (lecture, index) => (
+                                  <div
+                                    key={`${lecture.period ?? "kisia"}-${index}`}
+                                    className="flex items-start gap-2 text-sm text-gray-700"
+                                  >
+                                    <span className="mt-[7px] h-1.5 w-1.5 shrink-0 rounded-full bg-[#00337B]" />
+
+                                    <div>
+                                      {lecture.period && (
+                                        <span className="mr-2 font-semibold text-[#00337B]">
+                                          {lecture.period}
+                                        </span>
+                                      )}
+
+                                      <span>{lecture.content}</span>
+                                    </div>
+                                  </div>
+                                )
+                              )}
+                            </div>
+                          </div>
+                        )}
+
                         <div className="mt-auto border-t border-gray-200 pt-5">
 
                           {instructor
