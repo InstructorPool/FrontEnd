@@ -1136,6 +1136,7 @@ import type {
 
 import {
   categoryMap,
+  topicAliasMap,
 } from "../data/categories";
 
 import type {
@@ -1280,6 +1281,36 @@ const MainPage = () => {
     return false;
   };
 
+  const normalizeTopic = (value: string) =>
+    value
+      .replace(/\s/g, "")
+      .replace(/[·.,/()_-]/g, "")
+      .toLowerCase();
+
+  const matchesSubCategory = (
+    topics: string[],
+    subCategory: string
+  ) => {
+    const aliases =
+      topicAliasMap[subCategory] ?? [
+        subCategory,
+      ];
+
+    return topics.some((topic) => {
+      const normalizedTopic =
+        normalizeTopic(topic);
+
+      return aliases.some((alias) => {
+        const normalizedAlias =
+          normalizeTopic(alias);
+
+        return normalizedTopic.includes(
+          normalizedAlias
+        );
+      });
+    });
+  };
+
   /* ========================================
      Modal
   ======================================== */
@@ -1350,13 +1381,19 @@ const MainPage = () => {
           (instructor) => {
             const categoryMatch =
               category === "전체" ||
-              instructor.categories.includes(
-                category
+              (
+                categoryMap[category] ?? []
+              ).some((categorySubItem) =>
+                matchesSubCategory(
+                  instructor.topics,
+                  categorySubItem
+                )
               );
 
             const subCategoryMatch =
               subCategory === "전체" ||
-              instructor.topics.includes(
+              matchesSubCategory(
+                instructor.topics,
                 subCategory
               );
 
