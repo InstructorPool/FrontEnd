@@ -1837,7 +1837,7 @@ const MainPage = () => {
                         {/* KISIA 강의 이력 */}
                         {(instructor.kisiaLectureHistories?.length ?? 0) > 0 && (
                           <div className="mt-5">
-                            <p className="mb-3 text-sm font-bold text-gray-700">
+                            <p className="mb-3 text-m font-bold text-gray-700">
                               KISIA 강의 이력
                             </p>
 
