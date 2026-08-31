@@ -1124,19 +1124,16 @@
 // export default MainPage;
 
 
-import {
-  useEffect,
-  useMemo,
-  useState,
-} from "react";
+import { useEffect, useMemo, useState} from "react";
 
-import type {
-  KeyboardEvent,
-} from "react";
+import type { KeyboardEvent } from "react";
 
+// import {
+//   categoryMap,
+//   topicAliasMap,
+// } from "../data/categories";
 import {
   categoryMap,
-  topicAliasMap,
 } from "../data/categories";
 
 import type {
@@ -1281,35 +1278,35 @@ const MainPage = () => {
     return false;
   };
 
-  const normalizeTopic = (value: string) =>
-    value
-      .replace(/\s/g, "")
-      .replace(/[·.,/()_-]/g, "")
-      .toLowerCase();
+  // const normalizeTopic = (value: string) =>
+  //   value
+  //     .replace(/\s/g, "")
+  //     .replace(/[·.,/()_-]/g, "")
+  //     .toLowerCase();
 
-  const matchesSubCategory = (
-    topics: string[],
-    subCategory: string
-  ) => {
-    const aliases =
-      topicAliasMap[subCategory] ?? [
-        subCategory,
-      ];
+  // const matchesSubCategory = (
+  //   topics: string[],
+  //   subCategory: string
+  // ) => {
+  //   const aliases =
+  //     topicAliasMap[subCategory] ?? [
+  //       subCategory,
+  //     ];
 
-    return topics.some((topic) => {
-      const normalizedTopic =
-        normalizeTopic(topic);
+  //   return topics.some((topic) => {
+  //     const normalizedTopic =
+  //       normalizeTopic(topic);
 
-      return aliases.some((alias) => {
-        const normalizedAlias =
-          normalizeTopic(alias);
+  //     return aliases.some((alias) => {
+  //       const normalizedAlias =
+  //         normalizeTopic(alias);
 
-        return normalizedTopic.includes(
-          normalizedAlias
-        );
-      });
-    });
-  };
+  //       return normalizedTopic.includes(
+  //         normalizedAlias
+  //       );
+  //     });
+  //   });
+  // };
 
   /* ========================================
      Modal
@@ -1379,21 +1376,32 @@ const MainPage = () => {
       const result =
         instructors.filter(
           (instructor) => {
+            // const categoryMatch =
+            //   category === "전체" ||
+            //   (
+            //     categoryMap[category] ?? []
+            //   ).some((categorySubItem) =>
+            //     matchesSubCategory(
+            //       instructor.topics,
+            //       categorySubItem
+            //     )
+            //   );
+
+            // const subCategoryMatch =
+            //   subCategory === "전체" ||
+            //   matchesSubCategory(
+            //     instructor.topics,
+            //     subCategory
+            //   );
             const categoryMatch =
               category === "전체" ||
-              (
-                categoryMap[category] ?? []
-              ).some((categorySubItem) =>
-                matchesSubCategory(
-                  instructor.topics,
-                  categorySubItem
-                )
+              instructor.categories.includes(
+                category
               );
 
             const subCategoryMatch =
               subCategory === "전체" ||
-              matchesSubCategory(
-                instructor.topics,
+              instructor.subCategories.includes(
                 subCategory
               );
 
@@ -1531,111 +1539,147 @@ const MainPage = () => {
             <div className="flex flex-wrap items-center justify-center gap-3">
 
               {/* 대분류 */}
-              <select
-                value={category}
-                onChange={(e) =>
-                  handleCategoryChange(
-                    e.target.value
-                  )
-                }
-                className="h-12 min-w-44 rounded-md border border-gray-300 bg-white px-4 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
-              >
-                <option value="전체">
-                  대분류
-                </option>
-
-                {Object.keys(
-                  categoryMap
-                ).map((item) => (
-                  <option
-                    key={item}
-                    value={item}
-                  >
-                    {item}
+              <div className="relative min-w-44">
+                <select
+                  value={category}
+                  onChange={(e) =>
+                    handleCategoryChange(e.target.value)
+                  }
+                  className="h-12 w-full appearance-none rounded-md border border-gray-300 bg-white px-4 pr-11 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
+                >
+                  <option value="전체">
+                    대분류
                   </option>
-                ))}
-              </select>
 
-              {/* 세부분류 */}
-              <select
-                value={subCategory}
-                onChange={(e) =>
-                  setSubCategory(
-                    e.target.value
-                  )
-                }
-                disabled={
-                  category === "전체"
-                }
-                className="h-12 min-w-44 rounded-md border border-gray-300 bg-white px-4 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400"
-              >
-                <option value="전체">
-                  세부분류
-                </option>
-
-                {subCategories.map(
-                  (item) => (
+                  {Object.keys(categoryMap).map((item) => (
                     <option
                       key={item}
                       value={item}
                     >
                       {item}
                     </option>
-                  )
-                )}
-              </select>
+                  ))}
+                </select>
+
+                <svg
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="m6 9 6 6 6-6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
+
+              {/* 세부분류 */}
+              <div className="relative min-w-44">
+                <select
+                  value={subCategory}
+                  onChange={(e) =>
+                    setSubCategory(e.target.value)
+                  }
+                  disabled={category === "전체"}
+                  className="h-12 w-full appearance-none rounded-md border border-gray-300 bg-white px-4 pr-11 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15 disabled:cursor-not-allowed disabled:bg-gray-100 disabled:text-gray-400"
+                >
+                  <option value="전체">
+                    세부분류
+                  </option>
+
+                  {subCategories.map((item) => (
+                    <option
+                      key={item}
+                      value={item}
+                    >
+                      {item}
+                    </option>
+                  ))}
+                </select>
+
+                <svg
+                  className={`pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 ${
+                    category === "전체"
+                      ? "text-gray-300"
+                      : "text-gray-500"
+                  }`}
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="m6 9 6 6 6-6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
 
               {/* 검색 조건 */}
-              <select
-                value={searchType}
-                onChange={(e) =>
-                  setSearchType(
-                    e.target.value
-                  )
-                }
-                className="h-12 min-w-32 rounded-md border border-gray-300 bg-white px-4 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
-              >
-                <option value="전체">
-                  검색조건
-                </option>
+              <div className="relative min-w-32">
+                <select
+                  value={searchType}
+                  onChange={(e) =>
+                    setSearchType(e.target.value)
+                  }
+                  className="h-12 w-full appearance-none rounded-md border border-gray-300 bg-white px-4 pr-11 text-sm font-medium text-gray-800 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
+                >
+                  <option value="전체">
+                    검색조건
+                  </option>
 
-                <option value="이름">
-                  이름
-                </option>
+                  <option value="이름">
+                    이름
+                  </option>
 
-                <option value="기업명">
-                  기업명
-                </option>
+                  <option value="기업명">
+                    기업명
+                  </option>
 
-                <option value="강의분야">
-                  강의분야
-                </option>
-              </select>
+                  <option value="강의분야">
+                    강의분야
+                  </option>
+                </select>
+
+                <svg
+                  className="pointer-events-none absolute right-4 top-1/2 h-4 w-4 -translate-y-1/2 text-gray-500"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                >
+                  <path
+                    d="m6 9 6 6 6-6"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                  />
+                </svg>
+              </div>
 
               {/* 검색어 */}
               <input
                 value={keyword}
                 onChange={(e) =>
-                  setKeyword(
-                    e.target.value
-                  )
+                  setKeyword(e.target.value)
                 }
-                onKeyDown={
-                  handleKeyDown
-                }
+                onKeyDown={handleKeyDown}
                 placeholder="키워드를 입력하세요."
                 className="h-12 w-60 rounded-md border border-gray-300 bg-white px-4 text-sm outline-none transition placeholder:text-gray-400 focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
               />
 
+              {/* 조회 버튼 */}
               <button
                 type="button"
-                onClick={
-                  handleSearch
-                }
+                onClick={handleSearch}
                 className="h-12 rounded-md bg-[#00337B] px-8 font-semibold text-white transition hover:bg-[#00265C] focus:outline-none focus:ring-2 focus:ring-[#00337B]/30 focus:ring-offset-2"
               >
                 조회하기
               </button>
+
             </div>
           </section>
         </div>

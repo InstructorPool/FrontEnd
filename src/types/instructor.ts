@@ -17,6 +17,7 @@ export type Instructor = {
 
   // 강의 분야
   categories: string[];
+  subCategories: string[];
   topics: string[];
   description: string;
 
