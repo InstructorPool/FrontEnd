@@ -2206,20 +2206,6 @@ const MainPage = () => {
                 </section>
               )}
 
-              {selectedInstructor.historyRaw?.trim() && (
-                <section className="mt-8 border-t border-gray-200 pt-7">
-                  <h3 className="mb-4 text-lg font-bold text-gray-900">
-                    강사 이력
-                  </h3>
-
-                  <div className="rounded-xl bg-slate-50 px-5 py-4">
-                    <p className="whitespace-pre-line text-sm leading-7 text-gray-700">
-                      {selectedInstructor.historyRaw}
-                    </p>
-                  </div>
-                </section>
-              )}
-
               {selectedInstructor
                 .lectureHistories
                 .length > 0 && (
@@ -2261,6 +2247,20 @@ const MainPage = () => {
                       )
                     )}
                   </ul>
+                </section>
+              )}
+
+              {selectedInstructor.historyRaw?.trim() && (
+                <section className="mt-8 border-t border-gray-200 pt-7">
+                  <h3 className="mb-4 text-lg font-bold text-gray-900">
+                    강사 이력
+                  </h3>
+
+                  <div className="rounded-xl bg-slate-50 px-5 py-4">
+                    <p className="whitespace-pre-line text-sm leading-7 text-gray-700">
+                      {selectedInstructor.historyRaw}
+                    </p>
+                  </div>
                 </section>
               )}
 
