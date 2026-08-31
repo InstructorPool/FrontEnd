@@ -1675,7 +1675,7 @@ const MainPage = () => {
               <button
                 type="button"
                 onClick={handleSearch}
-                className="h-12 rounded-md bg-[#00337B] px-8 font-semibold text-white transition hover:bg-[#00265C] focus:outline-none focus:ring-2 focus:ring-[#00337B]/30 focus:ring-offset-2"
+                className="h-12 cursor-pointer rounded-md bg-[#00337B] px-8 font-semibold text-white transition hover:bg-[#00265C] focus:outline-none focus:ring-2 focus:ring-[#00337B]/30 focus:ring-offset-2"
               >
                 조회하기
               </button>
@@ -1988,7 +1988,7 @@ const MainPage = () => {
                                 instructor
                               )
                             }
-                            className="mt-5 w-full rounded-lg border border-[#00337B] py-2.5 text-sm font-semibold text-[#00337B] transition hover:bg-[#00337B] hover:text-white"
+                            className="mt-5 w-full rounded-lg border border-[#00337B] py-2.5 text-sm font-semibold text-[#00337B] transition hover:bg-[#00337B] hover:text-white cursor-pointer"
                           >
                             강사 이력
                             더보기
@@ -2323,7 +2323,7 @@ const MainPage = () => {
                 </section>
               )}
 
-              <div className="mt-9 flex justify-end border-t pt-5">
+              <div className="mt-9 flex justify-end border-t pt-5 cursor-pointer">
 
                 <button
                   type="button"
