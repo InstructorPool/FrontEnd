@@ -375,6 +375,11 @@ const LoginPage = ({
   ] = useState("");
 
   const [
+    showPassword,
+    setShowPassword,
+  ] = useState(false);
+
+  const [
     isLoading,
     setIsLoading,
   ] = useState(false);
@@ -491,25 +496,137 @@ const LoginPage = ({
           비밀번호
         </label>
 
-        <input
-          type="password"
-          value={password}
-          onChange={(e) =>
-            setPassword(
-              e.target.value
-            )
-          }
-          onKeyDown={(e) => {
-            if (
-              e.key === "Enter"
-            ) {
-              handleLogin();
+        {/* ========================================
+            ✅ [추가]
+            비밀번호 입력창 + 보기/숨기기 버튼
+        ======================================== */}
+
+        <div className="relative">
+
+          <input
+            // ✅ [수정]
+            // showPassword가 true이면 비밀번호 표시
+            // false이면 기존처럼 ●●● 형태로 숨김
+            type={
+              showPassword
+                ? "text"
+                : "password"
             }
-          }}
-          placeholder="비밀번호"
-          autoComplete="current-password"
-          className="h-12 w-full rounded-lg border border-gray-300 bg-white px-4 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
-        />
+            value={password}
+            onChange={(e) =>
+              setPassword(
+                e.target.value
+              )
+            }
+            onKeyDown={(e) => {
+              if (
+                e.key === "Enter"
+              ) {
+                handleLogin();
+              }
+            }}
+            placeholder="비밀번호"
+            autoComplete="current-password"
+
+            // ✅ [수정]
+            // 오른쪽 눈 아이콘과 글자가 겹치지 않도록 pr-12 추가
+            className="h-12 w-full rounded-lg border border-gray-300 bg-white px-4 pr-12 outline-none transition focus:border-[#00337B] focus:ring-2 focus:ring-[#00337B]/15"
+          />
+
+          {/* ========================================
+              ✅ [추가]
+              비밀번호 보기 / 숨기기 버튼
+          ======================================== */}
+
+          <button
+            type="button"
+            onClick={() =>
+              setShowPassword(
+                !showPassword
+              )
+            }
+            className="absolute right-3 top-1/2 flex -translate-y-1/2 cursor-pointer items-center justify-center text-gray-400 transition hover:text-[#00337B]"
+            aria-label={
+              showPassword
+                ? "비밀번호 숨기기"
+                : "비밀번호 보기"
+            }
+            title={
+              showPassword
+                ? "비밀번호 숨기기"
+                : "비밀번호 보기"
+            }
+          >
+
+            {showPassword ? (
+              /* ========================================
+                 ✅ [추가]
+                 비밀번호가 보이는 상태 → 눈 가림 아이콘
+              ======================================== */
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-5 w-5"
+              >
+                <path
+                  d="M3 3l18 18"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <path
+                  d="M10.6 10.6a2 2 0 0 0 2.8 2.8"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <path
+                  d="M9.9 4.2A10.5 10.5 0 0 1 12 4c5.5 0 9 6 9 6a17 17 0 0 1-2.1 2.9"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <path
+                  d="M6.6 6.6C4.4 8 3 10 3 10s3.5 6 9 6a9.7 9.7 0 0 0 3-.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+              </svg>
+            ) : (
+              /* ========================================
+                 ✅ [추가]
+                 비밀번호가 숨겨진 상태 → 눈 아이콘
+              ======================================== */
+
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2"
+                className="h-5 w-5"
+              >
+                <path
+                  d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                />
+
+                <circle
+                  cx="12"
+                  cy="12"
+                  r="3"
+                />
+              </svg>
+            )}
+
+          </button>
+
+        </div>
 
         {/* 로그인 버튼 */}
 
