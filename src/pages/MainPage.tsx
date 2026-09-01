@@ -1140,7 +1140,16 @@ import type {
   Instructor,
 } from "../types/instructor";
 
-const MainPage = () => {
+// ✅ [로그인 기능 추가]
+type MainPageProps = {
+  userEmail: string;
+  onLogout: () => void;
+};
+
+const MainPage = ({
+  userEmail,
+  onLogout,
+}: MainPageProps) => {
   /* ========================================
      강사 데이터
   ======================================== */
@@ -1212,6 +1221,10 @@ const MainPage = () => {
           {
             method: "GET",
             cache: "no-store",
+
+            // ✅ [로그인 기능 추가]
+            // HttpOnly 로그인 쿠키를 API 요청에 함께 전달
+            credentials: "include",
           }
         );
 
@@ -1549,9 +1562,37 @@ const MainPage = () => {
 
         <div className="sticky top-0 z-40 bg-white/95 pb-5 pt-8 backdrop-blur-sm">
 
-          <h1 className="mb-6 text-center text-3xl font-bold text-gray-900">
-            전문 강사 조회
-          </h1>
+
+          {/* ========================================
+              ✅ [로그인 기능 추가]
+              기존 제목은 그대로 유지하고
+              오른쪽에 로그인 이메일 + 로그아웃 버튼 추가
+          ======================================== */}
+
+          <div className="relative mb-6">
+
+            <h1 className="text-center text-3xl font-bold text-gray-900">
+              전문 강사 조회
+            </h1>
+
+            <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center gap-3">
+
+              {/* ✅ [로그인 기능 추가] 로그인한 이메일 표시 */}
+              <span className="text-sm text-gray-500">
+                {userEmail}
+              </span>
+
+              {/* ✅ [로그인 기능 추가] 로그아웃 버튼 */}
+              <button
+                type="button"
+                onClick={onLogout}
+                className="cursor-pointer rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium text-gray-600 transition hover:border-[#00337B] hover:text-[#00337B]"
+              >
+                로그아웃
+              </button>
+
+            </div>
+          </div>
 
           <section className="rounded-2xl bg-slate-50 px-8 py-5 shadow-sm">
             <div className="flex flex-wrap items-center justify-center gap-3">
