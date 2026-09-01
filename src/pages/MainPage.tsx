@@ -1177,6 +1177,12 @@ const MainPage = () => {
     setSearchKeyword,
   ] = useState("");
 
+  // KISIA 강의 이력이 있는 강사 조회
+  const [
+    onlyKisia,
+    setOnlyKisia,
+  ] = useState(false);
+
   const [sort, setSort] =
     useState("name");
 
@@ -1405,6 +1411,15 @@ const MainPage = () => {
                 subCategory
               );
 
+            // 체크했으면 KISIA 강의 이력이 1개 이상인 강사만 통과
+            const kisiaMatch =
+              !onlyKisia ||
+              (
+                instructor
+                  .kisiaLectureHistories
+                  ?.length ?? 0
+              ) > 0;
+
             const targetKeyword =
               searchKeyword
                 .trim()
@@ -1413,7 +1428,8 @@ const MainPage = () => {
             if (!targetKeyword) {
               return (
                 categoryMatch &&
-                subCategoryMatch
+                subCategoryMatch &&
+                kisiaMatch
               );
             }
 
@@ -1519,6 +1535,7 @@ const MainPage = () => {
       searchType,
       searchKeyword,
       sort,
+      onlyKisia,
     ]);
 
   return (
@@ -1659,6 +1676,49 @@ const MainPage = () => {
                   />
                 </svg>
               </div>
+
+              {/* ========================================
+                  KISIA 강의 이력 필터
+              ======================================== */}
+
+              <label
+                className="
+                  flex
+                  h-12
+                  cursor-pointer
+                  items-center
+                  gap-2
+                  whitespace-nowrap
+                  rounded-md
+                  border
+                  border-gray-300
+                  bg-white
+                  px-4
+                  text-sm
+                  font-medium
+                  text-gray-700
+                  transition
+                  hover:border-[#7FA1C9]
+                "
+              >
+                <input
+                  type="checkbox"
+                  checked={onlyKisia}
+                  onChange={(e) =>
+                    setOnlyKisia(
+                      e.target.checked
+                    )
+                  }
+                  className="
+                    h-4
+                    w-4
+                    cursor-pointer
+                    accent-[#00337B]
+                  "
+                />
+
+                KISIA 강의 이력
+              </label>
 
               {/* 검색어 */}
               <input
@@ -2049,7 +2109,7 @@ const MainPage = () => {
                     null
                   )
                 }
-                className="flex h-9 w-9 items-center justify-center rounded-full text-2xl text-gray-500 hover:bg-gray-100 hover:text-[#00337B]"
+                className="flex h-9 w-9 items-center justify-center rounded-full text-2xl text-gray-500 hover:bg-gray-100 hover:text-[#00337B] cursor-pointer"
               >
                 ×
               </button>
@@ -2323,7 +2383,7 @@ const MainPage = () => {
                 </section>
               )}
 
-              <div className="mt-9 flex justify-end border-t pt-5 cursor-pointer">
+              <div className="mt-9 flex justify-end border-t pt-5">
 
                 <button
                   type="button"
@@ -2332,7 +2392,7 @@ const MainPage = () => {
                       null
                     )
                   }
-                  className="rounded-lg bg-[#00337B] px-7 py-2.5 text-sm font-semibold text-white hover:bg-[#00265C]"
+                  className="rounded-lg bg-[#00337B] px-7 py-2.5 text-sm font-semibold text-white hover:bg-[#00265C] cursor-pointer"
                 >
                   닫기
                 </button>
