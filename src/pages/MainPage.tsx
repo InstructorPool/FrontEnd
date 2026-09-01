@@ -1895,7 +1895,7 @@ const MainPage = () => {
                           </div>
                         )}
 
-                        <div className="mt-5 space-y-2 text-[15px] text-gray-800">
+                        <div className="mt-5 space-y-2 text-[15px] text-gray-800 mb-3">
 
                           {instructor.career >
                             0 && (
@@ -1978,7 +1978,7 @@ const MainPage = () => {
 
                         {/* KISIA 강의 이력 */}
                         {(instructor.kisiaLectureHistories?.length ?? 0) > 0 && (
-                          <div className="mt-5">
+                          <div className="mt-5 mb-3">
                             <p className="mb-3 text-m font-bold text-gray-700">
                               KISIA 강의 이력
                             </p>
@@ -2005,18 +2005,19 @@ const MainPage = () => {
                                 )
                               )}
                             </div>
-                            {instructor.satisfaction?.trim() && (
-                              <div className="mt-3 text-sm text-gray-700">
+                          </div>
+                        )}
+
+                        {instructor.satisfaction?.trim() && (
+                              <div className="mt-3 text-sm text-gray-700 mb-3 font-semibold">
                                 <span className="font-bold">
                                   만족도 :
                                 </span>{" "}
-                                <span className="font-semibold text-[#00337B]">
+                                <span className="font-semibold text-black">
                                   {instructor.satisfaction}
                                 </span>
                               </div>
                             )}
-                          </div>
-                        )}
 
                         <div className="mt-auto border-t border-gray-200 pt-5">
 
