@@ -1,6 +1,6 @@
 import {
   getAuthenticatedUser,
-} from "../../server/auth";
+} from "../lib/auth.js";
 
 export async function GET(
   request: Request
