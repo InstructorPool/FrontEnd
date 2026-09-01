@@ -3,7 +3,7 @@ import bcrypt from "bcryptjs";
 import {
   createSessionCookie,
   createSessionToken,
-} from "../../server/auth";
+} from "../lib/auth.js";
 
 export async function POST(
   request: Request

@@ -1,7 +1,7 @@
 import {
   clearCookie,
   SESSION_COOKIE_NAME,
-} from "../../server/auth";
+} from "../lib/auth.js";
 
 export async function POST() {
   return Response.json(
