@@ -32,6 +32,9 @@ export type Instructor = {
   // KISIA 강의 이력
   kisiaLectureHistories: HistoryItem[];
 
+  //만족도
+  satisfaction?: string;
+
   // 자격 / 저서
   certifications: string[];
   publications: string[];

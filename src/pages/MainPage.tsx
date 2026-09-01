@@ -1498,6 +1498,7 @@ const MainPage = () => {
             return (
               categoryMatch &&
               subCategoryMatch &&
+              kisiaMatch &&
               searchMatch
             );
           }
@@ -2004,6 +2005,16 @@ const MainPage = () => {
                                 )
                               )}
                             </div>
+                            {instructor.satisfaction?.trim() && (
+                              <div className="mt-3 text-sm text-gray-700">
+                                <span className="font-bold">
+                                  만족도 :
+                                </span>{" "}
+                                <span className="font-semibold text-[#00337B]">
+                                  {instructor.satisfaction}
+                                </span>
+                              </div>
+                            )}
                           </div>
                         )}
 
