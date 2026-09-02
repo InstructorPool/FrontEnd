@@ -1715,7 +1715,27 @@ const MainPage = ({
                       .includes(
                         targetKeyword
                       )
-                );
+                ) ||
+
+                // KISIA 강의 이력의 기간 / 강의 내용도 전체 검색에 포함
+                instructor
+                  .kisiaLectureHistories
+                  ?.some(
+                    (lecture) =>
+                      (
+                        lecture.period ??
+                        ""
+                      )
+                        .toLowerCase()
+                        .includes(
+                          targetKeyword
+                        ) ||
+                      lecture.content
+                        .toLowerCase()
+                        .includes(
+                          targetKeyword
+                        )
+                  ) === true;
             }
 
             return (
