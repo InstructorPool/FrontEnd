@@ -1433,6 +1433,12 @@ const MainPage = ({
     setOnlyKisia,
   ] = useState(false);
 
+  // 만족도가 등록된 강사 조회
+  const [
+    onlySatisfaction,
+    setOnlySatisfaction,
+  ] = useState(false);
+
   const [
     sort,
     setSort,
@@ -1621,6 +1627,15 @@ const MainPage = ({
                 0
               ) > 0;
 
+            // 체크했으면 만족도 값이 있는 강사만 통과
+            const satisfactionMatch =
+              !onlySatisfaction ||
+              Boolean(
+                instructor
+                  .satisfaction
+                  ?.trim()
+              );
+
             const targetKeyword =
               searchKeyword
                 .trim()
@@ -1632,7 +1647,8 @@ const MainPage = ({
               return (
                 categoryMatch &&
                 subCategoryMatch &&
-                kisiaMatch
+                kisiaMatch &&
+                satisfactionMatch
               );
             }
 
@@ -1706,6 +1722,7 @@ const MainPage = ({
               categoryMatch &&
               subCategoryMatch &&
               kisiaMatch &&
+              satisfactionMatch &&
               searchMatch
             );
           }
@@ -1755,6 +1772,7 @@ const MainPage = ({
       searchKeyword,
       sort,
       onlyKisia,
+      onlySatisfaction,
     ]);
 
   return (
@@ -1796,6 +1814,11 @@ const MainPage = ({
             onlyKisia={
               onlyKisia
             }
+
+            onlySatisfaction={
+              onlySatisfaction
+            }
+            
             onCategoryChange={
               handleCategoryChange
             }
@@ -1810,6 +1833,9 @@ const MainPage = ({
             }
             onOnlyKisiaChange={
               setOnlyKisia
+            }
+            onOnlySatisfactionChange={
+              setOnlySatisfaction
             }
             onSearch={
               handleSearch
@@ -1878,7 +1904,7 @@ const MainPage = ({
                 </section>
               ) : (
                 <div className="flex h-60 items-center justify-center rounded-2xl bg-gray-50 text-gray-500">
-                  검색 조건에 맞는 강사가 없습니다.
+                  검색 조건에 맞는 강사님이 없습니다.
                 </div>
               )}
 

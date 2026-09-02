@@ -9,6 +9,7 @@ type InstructorSearchFiltersProps = {
   searchType: string;
   keyword: string;
   onlyKisia: boolean;
+  onlySatisfaction: boolean;
 
   onCategoryChange: (
     value: string
@@ -30,6 +31,10 @@ type InstructorSearchFiltersProps = {
     value: boolean
   ) => void;
 
+  onOnlySatisfactionChange: (
+    value: boolean
+  ) => void;
+
   onSearch: () => void;
 };
 
@@ -40,11 +45,14 @@ const InstructorSearchFilters = ({
   searchType,
   keyword,
   onlyKisia,
+  onlySatisfaction,
+
   onCategoryChange,
   onSubCategoryChange,
   onSearchTypeChange,
   onKeywordChange,
   onOnlyKisiaChange,
+  onOnlySatisfactionChange,
   onSearch,
 }: InstructorSearchFiltersProps) => {
   return (
@@ -228,6 +236,47 @@ const InstructorSearchFilters = ({
           />
 
           KISIA 강의 이력
+        </label>
+
+        <label
+          className="
+            flex
+            h-12
+            cursor-pointer
+            items-center
+            gap-2
+            whitespace-nowrap
+            rounded-md
+            border
+            border-gray-300
+            bg-white
+            px-4
+            text-sm
+            font-medium
+            text-gray-700
+            transition
+            hover:border-[#7FA1C9]
+          "
+        >
+          <input
+            type="checkbox"
+            checked={
+              onlySatisfaction
+            }
+            onChange={(e) =>
+              onOnlySatisfactionChange(
+                e.target.checked
+              )
+            }
+            className="
+              h-4
+              w-4
+              cursor-pointer
+              accent-[#00337B]
+            "
+          />
+
+          만족도 등록
         </label>
 
         {/* 검색어 */}
