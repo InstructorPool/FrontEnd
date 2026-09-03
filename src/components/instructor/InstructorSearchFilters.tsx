@@ -199,8 +199,10 @@ const InstructorSearchFilters = ({
             KISIA 강의 이력 필터
         ======================================== */}
 
-        <label
+        <div
           className="
+            group
+            relative
             flex
             h-12
             cursor-pointer
@@ -219,27 +221,81 @@ const InstructorSearchFilters = ({
             hover:border-[#7FA1C9]
           "
         >
-          <input
-            type="checkbox"
-            checked={onlyKisia}
-            onChange={(e) =>
-              onOnlyKisiaChange(
-                e.target.checked
-              )
-            }
+          <label className="flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              checked={onlyKisia}
+              onChange={(e) =>
+                onOnlyKisiaChange(
+                  e.target.checked
+                )
+              }
+              className="
+                h-4
+                w-4
+                cursor-pointer
+                accent-[#00337B]
+              "
+            />
+
+            <span>
+              KISIA 강의 이력
+            </span>
+          </label>
+
+          {/* ========================================
+              Hover 설명
+          ======================================== */}
+
+          <div
             className="
-              h-4
-              w-4
-              cursor-pointer
-              accent-[#00337B]
+              pointer-events-none
+              absolute
+              left-1/2
+              top-full
+              z-50
+              mt-2
+              hidden
+              -translate-x-1/2
+              rounded-lg
+              bg-gray-900
+              px-3
+              py-2.5
+              text-left
+              text-xs
+              font-normal
+              leading-5
+              text-white
+              shadow-lg
+              group-hover:block
             "
-          />
+          >
+            <div>선택하시면 KISIA에서 실제로 강의를</div>
+            <div>진행한 이력이 있는 강사님만 조회합니다.</div>
 
-          KISIA 강의 이력
-        </label>
+            {/* 말풍선 삼각형 */}
+            <div
+              className="
+                absolute
+                bottom-full
+                left-1/2
+                -translate-x-1/2
+                border-4
+                border-transparent
+                border-b-gray-900
+              "
+            />
+          </div>
+        </div>
 
-        <label
+        {/* ========================================
+            만족도 등록 강사 필터
+        ======================================== */}
+
+        <div
           className="
+            group
+            relative
             flex
             h-12
             cursor-pointer
@@ -258,26 +314,72 @@ const InstructorSearchFilters = ({
             hover:border-[#7FA1C9]
           "
         >
-          <input
-            type="checkbox"
-            checked={
-              onlySatisfaction
-            }
-            onChange={(e) =>
-              onOnlySatisfactionChange(
-                e.target.checked
-              )
-            }
-            className="
-              h-4
-              w-4
-              cursor-pointer
-              accent-[#00337B]
-            "
-          />
+          <label className="flex cursor-pointer items-center gap-2">
+            <input
+              type="checkbox"
+              checked={onlySatisfaction}
+              onChange={(e) =>
+                onOnlySatisfactionChange(
+                  e.target.checked
+                )
+              }
+              className="
+                h-4
+                w-4
+                cursor-pointer
+                accent-[#00337B]
+              "
+            />
 
-          만족도 등록
-        </label>
+            <span>
+              만족도 등록
+            </span>
+          </label>
+
+          {/* ========================================
+              Hover 설명
+          ======================================== */}
+
+          <div
+            className="
+              pointer-events-none
+              absolute
+              left-1/2
+              top-full
+              z-50
+              mt-2
+              hidden
+              -translate-x-1/2
+              rounded-lg
+              bg-gray-900
+              px-3
+              py-2.5
+              text-left
+              text-xs
+              font-normal
+              leading-5
+              text-white
+              shadow-lg
+              group-hover:block
+            "
+          >
+            <div>선택하시면 강의 만족도 정보가</div>
+            <div>등록되어 있는 강사님만 조회합니다.</div>
+
+            {/* 말풍선 삼각형 */}
+            <div
+              className="
+                absolute
+                bottom-full
+                left-1/2
+                -translate-x-1/2
+                border-4
+                border-transparent
+                border-b-gray-900
+              "
+            />
+          </div>
+        </div>
 
         {/* 검색어 */}
         <input
@@ -306,7 +408,6 @@ const InstructorSearchFilters = ({
         >
           조회하기
         </button>
-
       </div>
     </section>
   );

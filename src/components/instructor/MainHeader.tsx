@@ -1,3 +1,5 @@
+import CategoryGuidePopover from "../common/CategoryGuidePopover";
+
 type MainHeaderProps = {
   userEmail: string;
   onLogout: () => void;
@@ -9,10 +11,16 @@ const MainHeader = ({
 }: MainHeaderProps) => {
   return (
     <div className="relative mb-6">
-      <h1 className="text-center text-3xl font-bold text-gray-900">
-        전문 강사 조회
-      </h1>
 
+      <div className="flex items-center justify-center gap-2">
+        <h1 className="text-3xl font-bold text-gray-900">
+          전문 강사 조회
+        </h1>
+
+        <CategoryGuidePopover />
+      </div>
+
+      {/* 로그인 사용자 + 로그아웃 */}
       <div className="absolute right-0 top-1/2 flex -translate-y-1/2 items-center gap-3">
         <span className="text-sm text-gray-500">
           {userEmail}
@@ -26,6 +34,7 @@ const MainHeader = ({
           로그아웃
         </button>
       </div>
+
     </div>
   );
 };
