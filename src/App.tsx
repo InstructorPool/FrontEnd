@@ -346,12 +346,31 @@ const AuthenticatedMain = () => {
     };
 
   if (isLoading) {
-    return (
-      <main className="flex min-h-screen items-center justify-center text-gray-500">
-        로그인 정보를 확인하는 중입니다...
-      </main>
-    );
-  }
+  return (
+    <main className="flex min-h-screen items-center justify-center bg-white">
+      <div className="flex flex-col items-center gap-4">
+
+        {/* 로딩 스피너 */}
+        <div
+          className="
+            h-10
+            w-10
+            animate-spin
+            rounded-full
+            border-4
+            border-gray-200
+            border-t-[#00337B]
+          "
+        />
+
+        <p className="text-sm text-gray-500">
+          로그인 정보를 확인하는 중입니다...
+        </p>
+
+      </div>
+    </main>
+  );
+}
 
   if (!username) {
     return (
