@@ -1869,8 +1869,27 @@ const MainPage = ({
         ======================================== */}
 
         {isLoading && (
-          <div className="flex h-64 items-center justify-center text-gray-500">
-            강사 정보를 불러오는 중입니다...
+          <div className="flex h-64 items-center justify-center">
+            <div className="flex flex-col items-center gap-4">
+
+              {/* 로딩 스피너 */}
+              <div
+                className="
+                  h-10
+                  w-10
+                  animate-spin
+                  rounded-full
+                  border-4
+                  border-gray-200
+                  border-t-[#00337B]
+                "
+              />
+
+              <p className="text-sm text-gray-500">
+                강사 정보를 불러오는 중입니다...
+              </p>
+
+            </div>
           </div>
         )}
 
